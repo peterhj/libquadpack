@@ -16,7 +16,7 @@ fn main() {
   let out_dir = env::var("OUT_DIR").unwrap();
 
   let mut quadpack_root = PathBuf::from(&manifest_dir);
-  quadpack_root.push("quadpack");
+  quadpack_root.push("slatec_quadpack");
 
   run(Command::new("make")
       .current_dir(&out_dir)

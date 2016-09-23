@@ -1,11 +1,29 @@
 use libc::*;
+use std::f64;
 
 #[link(name = "gfortran")]
 extern "C" {}
 
-#[no_mangle]
+/*#[no_mangle]
 pub extern "C" fn xerror_(msg: *mut c_void, nmsg: *mut c_int, nerr: *mut c_int, level: *mut c_int) {
-  panic!("quadpack called xerror");
+  panic!("quadpack: called xerror");
+}*/
+
+#[no_mangle]
+pub extern "C" fn xermsg_(library: *mut c_void, subroutine: *mut c_void, msg: *mut c_void, nmsg: *mut c_int, nerr: *mut c_int, level: *mut c_int) {
+  panic!("quadpack: called xermsg");
+}
+
+#[no_mangle]
+pub extern "C" fn d1mach_(code: *mut c_int) -> f64 {
+  match unsafe { *code } {
+    1 => f64::MIN_POSITIVE,
+    2 => f64::MAX,
+    3 => f64::EPSILON,
+    4 => 2.0 * f64::EPSILON,
+    5 => f64::consts::LN_2 / f64::consts::LN_10,
+    _ => unreachable!(),
+  }
 }
 
 #[link(name = "quadpack_native", kind = "static")]
