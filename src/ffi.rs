@@ -19,8 +19,8 @@ pub extern "C" fn d1mach_(code: *mut c_int) -> f64 {
   match unsafe { *code } {
     1 => f64::MIN_POSITIVE,
     2 => f64::MAX,
-    3 => f64::EPSILON,
-    4 => 2.0 * f64::EPSILON,
+    3 => 0.5 * f64::EPSILON,
+    4 => f64::EPSILON,
     5 => f64::consts::LN_2 / f64::consts::LN_10,
     _ => unreachable!(),
   }
