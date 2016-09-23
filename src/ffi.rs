@@ -17,7 +17,8 @@ pub extern "C" fn xermsg_(library: *mut c_void, subroutine: *mut c_void, msg: *m
 
 #[no_mangle]
 pub extern "C" fn r1mach_(code: *mut c_int) -> f32 {
-  match unsafe { *code } {
+  let c = unsafe { *code };
+  match c {
     1 => f32::MIN_POSITIVE,
     2 => f32::MAX,
     3 => 0.5 * f32::EPSILON,
@@ -30,7 +31,7 @@ pub extern "C" fn r1mach_(code: *mut c_int) -> f32 {
 #[no_mangle]
 pub extern "C" fn d1mach_(code: *mut c_int) -> f64 {
   let c = unsafe { *code };
-  println!("DEBUG: d1mach: code: {}", c);
+  //println!("DEBUG: d1mach: code: {}", c);
   match c {
     1 => f64::MIN_POSITIVE,
     2 => f64::MAX,
